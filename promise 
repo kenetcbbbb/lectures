@@ -1,0 +1,13 @@
+let myPromise = new Promise((resolve, reject) =>
+  setTimeout(() => {
+    let success = true;
+    if (success) {
+      resolve("Данные получены!");
+    } else {
+      reject("Ошибка!"); 
+    }
+  }, 1000);
+});
+
+  .then(result => console.result(result))
+  .catch(error => console.error(error))
