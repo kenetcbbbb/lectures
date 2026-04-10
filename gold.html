@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Золотые слитки и рюкзак</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .bars span { margin-right: 8px; }
+        .chosen { color: green; font-weight: bold; }
+        .not-chosen { color: #999; }
+    </style>
+</head>
+<body>
+<h2>Задача про рюкзак (динамическое программирование)</h2>
+
+<p><b>Слитки (кг):</b> 4, 5, 5, 6, 6, 6, 8, 8, 9, 10</p>
+
+<label>
+    Вместимость рюкзака (кг):
+    <input id="capacity" type="number" value="20" min="1">
+</label>
+<button onclick="solve()">Подобрать слитки</button>
+
+<h3>Результат</h3>
+<p id="summary"></p>
+<div id="bars" class="bars"></div>
+
+<script>
+    // Массив весов слитков
+    const weights = [4, 5, 5, 6, 6, 6, 8, 8, 9, 10];
+
+    function solve() {
+        const C = parseInt(document.getElementById('capacity').value, 10);
+        if (isNaN(C) || C <= 0) {
+            alert('Введите положительное число для вместимости.');
+            return;
+        }
+
+        const n = weights.length;
+
+        // dp[i][w] = максимальный вес, который можно набрать,
+        // используя первые i слитков и вместимость w
+        const dp = Array.from({ length: n + 1 }, () =>
+            Array(C + 1).fill(0)
+        );
+
+        // Заполняем таблицу DP
+        for (let i = 1; i <= n; i++) {
+            const wi = weights[i - 1];
+            for (let w = 0; w <= C; w++) {
+                // не берем слиток i
+                dp[i][w] = dp[i - 1][w];
+                // пробуем взять слиток i
+                if (wi <= w) {
+                    const candidate = dp[i - 1][w - wi] + wi;
+                    if (candidate > dp[i][w]) {
+                        dp[i][w] = candidate;
+                    }
+                }
+            }
+        }
+
+        // Максимальный возможный вес
+        const best = dp[n][C];
+
+        // Восстановление выбранных слитков
+        const chosen = Array(n).fill(false);
+        let w = C;
+        for (let i = n; i > 0; i--) {
+            if (dp[i][w] !== dp[i - 1][w]) {
+                // слиток i-1 взяли
+                chosen[i - 1] = true;
+                w -= weights[i - 1];
+            }
+        }
+
+        // Вывод результата
+        const summary = document.getElementById('summary');
+        summary.textContent =
+            'Максимально можно набрать: ' + best + ' кг из ' + C + ' кг.';
+
+        const barsDiv = document.getElementById('bars');
+        barsDiv.innerHTML = '';
+        weights.forEach((wt, idx) => {
+            const span = document.createElement('span');
+            span.textContent = wt + 'кг';
+            span.className = chosen[idx] ? 'chosen' : 'not-chosen';
+            barsDiv.appendChild(span);
+        });
+    }
+
+    // Запуск один раз при загрузке страницы
+    solve();
+</script>
+</body>
+</html>

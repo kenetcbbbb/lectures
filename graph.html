@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Все пути от S до T</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.css" rel="stylesheet"/>
+  <style>
+    #network { width: 800px; height: 500px; border: 1px solid #ccc; }
+    .paths { margin-top: 20px; font-family: Arial, sans-serif; }
+    .path { margin: 5px 0; }
+  </style>
+</head>
+<body>
+<h2>Граф и пути от S до T</h2>
+<div id="network"></div>
+
+<div class="paths">
+  <h3>Найденные пути:</h3>
+  <div class="path">S → A → D → T</div>
+  <div class="path">S → A → C → T</div>
+  <div class="path">S → B → C → T</div>
+  <div class="path">S → B → D → T</div>
+  <div class="path">S → A → B → D → T</div>
+  <div class="path">S → A → B → C → T</div>
+</div>
+
+<script>
+  // Узлы
+  const nodes = new vis.DataSet([
+    {id: 'S', label: 'S'},
+    {id: 'A', label: 'A'},
+    {id: 'B', label: 'B'},
+    {id: 'C', label: 'C'},
+    {id: 'D', label: 'D'},
+    {id: 'T', label: 'T'}
+  ]);
+
+  // Рёбра
+  const edges = new vis.DataSet([
+    {from: 'S', to: 'A'},
+    {from: 'S', to: 'B'},
+    {from: 'S', to: 'C'},
+    {from: 'A', to: 'B'},
+    {from: 'A', to: 'D'},
+    {from: 'B', to: 'D'},
+    {from: 'B', to: 'C'},
+    {from: 'C', to: 'T'},
+    {from: 'D', to: 'T'}
+  ]);
+
+  // Создание сети
+  const container = document.getElementById('network');
+  const data = { nodes, edges };
+  const options = {
+    edges: { arrows: 'to' },
+    physics: false,
+    layout: { hierarchical: { direction: 'LR', sortMethod: 'directed' } }
+  };
+  new vis.Network(container, data, options);
+</script>
+</body>
+</html>
