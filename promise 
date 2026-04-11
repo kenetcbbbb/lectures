@@ -1,13 +1,18 @@
+/* Создаём новый Promise-объект */
 let myPromise = new Promise((resolve, reject) =>
+  /* Устанавливаем таймер на 1 секунду */
   setTimeout(() => {
+    /* Имитируем успешный результат операции */
     let success = true;
+    /* Если успех — вызываем resolve, иначе reject */
     if (success) {
       resolve("Данные получены!");
     } else {
       reject("Ошибка!"); 
     }
-  }, 1000);
-});
-
-  .then(result => console.result(result))
-  .catch(error => console.error(error))
+  }, 1000)
+)
+  /* Обрабатываем успешный результат */
+  .then(result => console.log(result))
+  /* Обрабатываем ошибку */
+  .catch(error => console.error(error));
