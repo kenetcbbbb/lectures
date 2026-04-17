@@ -1,88 +1,433 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Моя визитка</title>
+  <title>Анастасия Максимович | Portfolio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background: #333;
-      color: white;
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
       padding: 20px;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header styles */
+    header {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+
+    header:hover {
+      transform: translateY(-5px);
+    }
+
+    header h1 {
+      color: #667eea;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #666;
+      font-size: 1.2em;
+    }
+
+    /* Section styles */
+    section {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      color: #667eea;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    /* Skills list */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      list-style: none;
+    }
+
+    .skills-list li {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .skills-list li:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Links */
+    .links-list {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .links-list li a {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 12px 25px;
+      border-radius: 10px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .links-list li a:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Projects */
+    .projects-list {
+      list-style: none;
+    }
+
+    .projects-list li {
+      background: #f8f9fa;
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      border-left: 4px solid #667eea;
+    }
+
+    .projects-list li:hover {
+      transform: translateX(10px);
+      background: #e9ecef;
+    }
+
+    .projects-list li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .projects-list li a:hover {
+      color: #667eea;
+    }
+
+    /* Contact section */
+    .contact-info {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
       text-align: center;
     }
-    section {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h2 {
-      border-bottom: 2px solid #333;
-      padding-bottom: 5px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    ul li {
+
+    .contact-info p {
+      font-size: 1.2em;
+      color: #333;
       margin: 10px 0;
     }
-    a {
-      color: #0066cc;
-      text-decoration: none;
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: white;
+      margin-top: 30px;
+      padding: 20px;
     }
-    a:hover {
-      text-decoration: underline;
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      z-index: 1000;
+      animation: fadeInOut 2s ease;
     }
-    .projects li {
-      background: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(-20px); }
+      15% { opacity: 1; transform: translateY(0); }
+      85% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Анастасия Максимович</h1>
-  <p>Разработчик • Решатель задач • Любитель алгоритмов</p>
-</header>
+<div class="container">
+  <header>
+    <h1>✨ Анастасия Максимович ✨</h1>
+    <p>💻 Developer • Problem Solver • Algorithm Lover 💻</p>
+  </header>
 
+  <!-- SKILLS SECTION -->
+  <section>
+    <h2>🛠️ My Skills</h2>
+    <ul class="skills-list">
+      <li>JavaScript</li>
+      <li>React.js</li>
+      <li>Node.js</li>
+.     <li>Python</li>
+.     <li>SQL</li>
+      <li>Git & GitHub</li>
+      <li>REST APIs</li>
+    </ul>
+  </section>
 
-<section>
-  <h2>Навыки</h2>
-  <ul>
-    <li> </li>
-  </ul>
-</section>
+  <!-- LINKS SECTION -->
+  <section>
+    <h2>🔗 Links</h2>
+    <ul class="links-list">
+      <li><a href="https://github.com/kenetcbbbb" target="_blank">🐙 GitHub Profile</a></li>
+      <li><a href="https://leetcode.com/nastyaflowers" target="_blank">⚡ LeetCode Profile</a></li>
+      <li><a href="#" target="_blank">📧 Contact Me</a></li>
+      <li><a href="#" target="_blank">📄 My Resume</a></li>
+    </ul>
+  </section>
 
-<section>
-  <h2>Ссылки</h2>
-  <ul>
-    <li><a href="https://github.com/kenetcbbbb" target="_blank">Мой GitHub</a></li>
-    <li><a href="https://leetcode.com/nastyaflowers" target="_blank">Мой LeetCode</a></li>
-  </ul>
-</section>
+  <!-- PROJECTS SECTION -->
+  <section>
+    <h2>📁 My Projects</h2>
+    <ul class="projects-list">
+      <li><a href="https://github.com/kenetcbbbb/codeshop" target="_blank">🚀 CodeShop - E-commerce platform with React & Node.js</a></li>
+      <li><a href="https://github.com/kenetcbbbb/poi" target="_blank">🗺️ POI Finder - Location-based service with Google Maps API</a></li>
+      <li><a href="https://github.com/kenetcbbbb/backend-shop" target="_blank">🛒 Backend Shop - REST API with Express & MongoDB</a></li>
+    </ul>
+  </section>
 
-<section>
-  <h2>Мои проекты</h2>
-  <ul class="projects">
-    <li><a href="https://github.com/kenetcbbbb/codeshop" target="_blank">Project 1 </a></li>
-    <li><a href="https://github.com/kenetcbbbb/poi" target="_blank">Project 2 </a></li>
-    <li><a href="https://github.com/kenetcbbbb/backend-shop" target="_blank">Project 3 </a></li>
-  </ul>
-</section>
+  <!-- CONTACT SECTION -->
+  <section class="contact-info">
+    <h2>📬 Contact Me</h2>
+    <p>📧 Email: <strong>nastyaflowers777@gmail.com</strong></p>
+  </section>
 
-<section>
-  <h2>Контакты</h2>
-  <p>Email: nastyaflowers777@gmail.com</p>
-</section>
+  <footer>
+    <p>© 2025 Anastasia Maksimovich | Built with 💜 using Python & JavaScript</p>
+  </footer>
+</div>
+
+<script>
+// ========== JAVASCRIPT FEATURES ==========
+
+// Show notification function
+function showNotification(msg, isError = false) {
+  let notification = document.createElement("div");
+  notification.className = "notification";
+  notification.textContent = msg;
+  
+  if (isError) {
+    notification.style.background = "#f44336";
+  } else {
+    notification.style.background = "#4CAF50";
+  }
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 2000);
+}
+
+// Skill click effect
+document.querySelectorAll(".skills-list li").forEach(skill => {
+  skill.addEventListener("click", function() {
+    let skillName = this.innerText;
+    showNotification(`💪 You clicked on: ${skillName}`);
+    console.log(`📊 Skill clicked: ${skillName}`);
+  });
+});
+
+// Project click tracking
+document.querySelectorAll(".projects-list li a").forEach(project => {
+  project.addEventListener("click", function() {
+    let projectName = this.innerText.split(" - ")[0];
+    showNotification(`🔗 Opening project: ${projectName}`);
+    console.log(`📊 Project opened: ${projectName}`);
+  });
+});
+
+// Link click tracking
+document.querySelectorAll(".links-list li a").forEach(link => {
+  link.addEventListener("click", function() {
+    let linkText = this.innerText;
+    showNotification(`🔗 Going to: ${linkText}`);
+    console.log(`📊 Link clicked: ${linkText}`);
+  });
+});
+
+// Dynamic year in footer
+let yearSpan = document.createElement("span");
+let currentYear = new Date().getFullYear();
+document.querySelector("footer p").innerHTML = `© ${currentYear} Anastasiya Maksimovich | Built with 💜 using Python & JavaScript`;
+
+// Console log to show JavaScript is working
+console.log("🚀 Portfolio website loaded!");
+console.log("📊 JavaScript is ready!");
+console.log("💻 Skills section interactive!");
+
+// Welcome message
+setTimeout(() => {
+  showNotification("🎉 Welcome to my portfolio! Click on skills to see magic!");
+}, 1000);
+
+// Track page visits (optional, no database)
+let visits = localStorage.getItem("page_visits");
+if (visits) {
+  visits = parseInt(visits) + 1;
+} else {
+  visits = 1;
+}
+localStorage.setItem("page_visits", visits);
+console.log(`📈 Page visited ${visits} times`);
+
+// Add visit counter to footer
+let visitCounter = document.createElement("p");
+visitCounter.style.marginTop = "10px";
+visitCounter.style.fontSize = "12px";
+visitCounter.style.opacity = "0.8";
+visitCounter.innerHTML = `📈 Page visits: ${visits}`;
+document.querySelector("footer").appendChild(visitCounter);
+
+// Hover effect on header
+let header = document.querySelector("header");
+header.addEventListener("mouseenter", function() {
+  console.log("👋 Mouse entered header!");
+});
+
+// Button to change theme (cool feature)
+let themeButton = document.createElement("button");
+themeButton.textContent = "🎨 Change Theme";
+themeButton.style.position = "fixed";
+themeButton.style.bottom = "20px";
+themeButton.style.right = "20px";
+themeButton.style.padding = "10px 20px";
+themeButton.style.background = "#667eea";
+themeButton.style.color = "white";
+themeButton.style.border = "none";
+themeButton.style.borderRadius = "10px";
+themeButton.style.cursor = "pointer";
+themeButton.style.zIndex = "1000";
+themeButton.style.fontWeight = "bold";
+themeButton.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+
+let isDarkTheme = false;
+themeButton.onclick = function() {
+  if (!isDarkTheme) {
+    document.body.style.background = "linear-gradient(135deg, #2c3e50 0%, #000000 100%)";
+    themeButton.textContent = "☀️ Light Theme";
+    showNotification("🌙 Dark theme activated!");
+    isDarkTheme = true;
+  } else {
+    document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+    themeButton.textContent = "🎨 Change Theme";
+    showNotification("☀️ Light theme activated!");
+    isDarkTheme = false;
+  }
+};
+
+document.body.appendChild(themeButton);
+
+// Show current time
+let timeDiv = document.createElement("div");
+timeDiv.style.position = "fixed";
+timeDiv.style.bottom = "20px";
+timeDiv.style.left = "20px";
+timeDiv.style.background = "rgba(0,0,0,0.7)";
+timeDiv.style.color = "white";
+timeDiv.style.padding = "8px 15px";
+timeDiv.style.borderRadius = "10px";
+timeDiv.style.fontSize = "14px";
+timeDiv.style.fontFamily = "monospace";
+timeDiv.style.zIndex = "1000";
+
+function updateTime() {
+  let now = new Date();
+  let timeString = now.toLocaleTimeString();
+  timeDiv.innerHTML = `🕐 ${timeString}`;
+}
+updateTime();
+setInterval(updateTime, 1000);
+
+document.body.appendChild(timeDiv);
+
+// Smooth scroll for anchor links (if any)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    let target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      showNotification(`📜 Scrolled to ${this.textContent}`);
+    }
+  });
+});
+
+// Easter egg (Konami code)
+let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === konamiCode[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      showNotification("🎮 KONAMI CODE ACTIVATED! 🎮");
+      document.body.style.background = "linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)";
+      setTimeout(() => {
+        if (!isDarkTheme) {
+          document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+        } else {
+          document.body.style.background = "linear-gradient(135deg, #2c3e50 0%, #000000 100%)";
+        }
+      }, 3000);
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+
+console.log("🎮 Easter egg: Try the Konami code! (↑ ↑ ↓ ↓ ← → ← → b a)");
+</script>
 
 </body>
 </html>
